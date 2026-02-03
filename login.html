@@ -9,25 +9,44 @@
 
 <body>
     <h1>Login</h1>
+
     <div class ="overlay">
         <div class="loginbox">
-            <div id="loginform">
-                <input class="loginfield" id="loginuser" placeholder="Login" type="text">
-                <input class="loginfield" id="loginpassword" placeholder="Password" type="password">
-                <div class="checkbox">
-                    <input type="checkbox"  onclick="showPassword()">
-                        Show Password
-                </div>
-               </div>
-                <button onclick="location.href = 'contacts.html';" class ="btn">
-                LOGIN
+            <button class="backBtn" onclick="location.href='index.html'" aria-label="Go back">
+                <img src="images/goback.png" alt="Back">
             </button>
-            <button onclick="location.href = 'index.html';" class ="btn">
-                Back
-            </button>
-            <p id="status"></p>
+            <h1 class="formTitle">LOGIN</h1>
+
+            <form id="loginform" class="form" autocomplete="on">
+                <label class="field">
+                    <span class="labelText">Login</span>
+                    <input class="loginfield" id="loginuser" placeholder="Username" type="text" required>
+                </label>
+
+                <label class="field">
+                    <span class="labelText">Password</span>
+                    <input class="loginfield" id="loginpassword" placeholder="Password" type="password" required>
+                </label>
+
+                <label class="checkbox">
+                    <input type="checkbox" onclick="showPassword()">
+                    <span>Show Password</span>
+                </label>
+
+                <!-- real login button (wired in app.js) -->
+                <button type="button" id="loginBtn" class="btn primaryBtn">Login</button>
+
+                <!--signup page-->
+                <p class="helperText">
+                    Don’t have an account?
+                    <a class="linkBtn" href="signup.html">Sign up</a>
+                </p>
+
+                <p id="status" class="status"></p>
+            </form>
         </div>
     </div>
+    <script src="js/md5.js"></script>
     <script src="js/app.js"></script>
 
 </body>

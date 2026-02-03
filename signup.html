@@ -6,19 +6,56 @@
 </head>
 
 <body>
-    <div class ="overlay">
-        <div class="signupbox">
-            <h1>Sign Up</h1>
-            <input id="regFirst" placeholder="first name">
-            <input id="regLast" placeholder="last name">
-            <input id="regLogin" placeholder="login">
-            <input id="regPassword" type="password" placeholder="password">
-            <button id="regBtn">Create Account</button>
-            <button id="backHome">Back</button>
-            <p id="status"></p>
+    <div class="overlay">
+        <div class="loginbox">
+            <!-- back arrow button -->
+            <button class="backBtn" onclick="location.href='index.html'" aria-label="Back to home">
+                <img src="images/goback.png" alt="Back">
+            </button>
+
+            <h1 class="formTitle">Sign Up</h1>
+            <!--info needed for account -->
+            <form class="form" autocomplete="on">
+                <label class="field">
+                    <span class="labelText">First Name:</span>
+                    <input class="loginfield" id="regFirst" placeholder="First Name" type="text" required>
+                </label>
+
+                <label class="field">
+                    <span class="labelText">Last Name</span>
+                    <input class="loginfield" id="regLast" placeholder="Last Name" type="text" required>
+                </label>
+
+                <label class="field">
+                    <span class="labelText">Create a Username</span>
+                    <input class="loginfield" id="regLogin" placeholder="Username" type="text" required>
+                </label>
+
+                <label class="field">
+                    <span class="labelText">Create a Secure Password</span>
+                    <input class="loginfield" id="regPassword" placeholder="Password" type="password" required>
+                </label>
+
+                <label class="checkbox">
+                    <input type="checkbox" onclick="togglePass('regPassword')">
+                    <span>Show Password</span>
+                </label>
+
+
+                <button type="button" id="regBtn" class="btn primaryBtn">Create Account</button>
+
+                <p class="helperText">
+                    Already have an account?
+                    <a class="linkBtn" href="login.html">Login</a>
+                </p>
+
+                <p id="status" class="status"></p>
+            </form>
         </div>
     </div>
-    <script src="js/app.js"></script>
-</body>
 
+<script src="js/md5.js"></script>
+<script src="js/app.js"></script>
+
+</body>
 </html>
