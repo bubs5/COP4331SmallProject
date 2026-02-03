@@ -11,14 +11,24 @@
     <h1>Login</h1>
     <div class ="overlay">
         <div class="loginbox">
-            <input type=text" id="loginuser" class="loginfield" placeholder="Login">
-            <input  type="password" id="loginpassword"  class="loginfield" placeholder="Password">
-            <button id="loginBtn">Login</button>
-            <button id="backHome">Back</button>
+            <div id="loginform">
+                <input class="loginfield" id="loginuser" placeholder="Login" type="text">
+                <input class="loginfield" id="loginpassword" placeholder="Password" type="password">
+                <div class="checkbox">
+                    <input type="checkbox"  onclick="showPassword()">
+                        Show Password
+                </div>
+               </div>
+                <button onclick="location.href = 'contacts.html';" class ="btn">
+                LOGIN
+            </button>
+            <button onclick="location.href = 'index.html';" class ="btn">
+                Back
+            </button>
             <p id="status"></p>
         </div>
     </div>
     <script src="js/app.js"></script>
-</body>
 
+</body>
 </html>

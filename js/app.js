@@ -22,8 +22,6 @@ function wireLanding(){
 
 //process of logging in
 function wireLogin(){
-    const back = document.getElementById("backHome")
-    if (back) back.onclick = () =>location.href = "index.html";
 
     document.getElementById("loginBtn").onclick = () => {
         console.log("Login Clicked")
@@ -32,7 +30,7 @@ function wireLogin(){
 
         //Login was succesful - pretend login for right now
         localStorage.setItem("loggedIn", "true");
-        location.href = "contacts.html";
+
     };
 }
 
