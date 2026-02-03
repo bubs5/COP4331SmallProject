@@ -57,3 +57,15 @@ function wireContacts(){
         location.href = "index.html";
     };
 }
+
+//show password checkbox
+function showPassword()
+{
+    var hidePass = document.getElementById("loginpassword")
+    if(hidePass.type === "password"){
+        hidePass.type = "text";
+    }
+    else{
+        hidePass.type = "password";
+    }
+}

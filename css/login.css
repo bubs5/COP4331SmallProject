@@ -54,3 +54,10 @@ body{
     opacity: 0.9;
 }
 
+/*checkbox*/
+
+.checkbox{
+    padding-right: 200px;
+    padding-bottom: 10px;
+    color: #ff0505
+}
