@@ -1,15 +1,23 @@
 <!doctype html>
-<html>
+<html lang="en">
 
-<head><meta charset="utf-8"><title>Login</title></head>
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
 
 <body>
     <h1>Login</h1>
-    <input id="loginuser" placeholder="login">
-    <input id="loginpassword" type="password" placeholder="password">
-    <button id="loginBtn">Login</button>
-    <button id="backHome">Back</button>
-    <p id="status"></p>
+    <div class ="overlay">
+        <div class="loginbox">
+            <input type=text" id="loginuser" class="loginfield" placeholder="Login">
+            <input  type="password" id="loginpassword"  class="loginfield" placeholder="Password">
+            <button id="loginBtn">Login</button>
+            <button id="backHome">Back</button>
+            <p id="status"></p>
+        </div>
+    </div>
     <script src="js/app.js"></script>
 </body>
 

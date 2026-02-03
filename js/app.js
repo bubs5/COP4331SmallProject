@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("app.js is loaded");
+    console.log("app.js is loaded");
 
     //landing
     if (document.getElementById("goLogin")) wireLanding();
@@ -15,10 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-//connect pages
+//main page
 function wireLanding(){
-    document.getElementById("goLogin").onclick = () => location.href = "login.html";
-    document.getElementById("goSignup").onclick = () => location.href = "signup.html";
+
 }
 
 //process of logging in
@@ -34,7 +33,7 @@ function wireLogin(){
         //Login was succesful - pretend login for right now
         localStorage.setItem("loggedIn", "true");
         location.href = "contacts.html";
-        };
+    };
 }
 
 function wireSignup(){
@@ -42,21 +41,21 @@ function wireSignup(){
     if (back) back.onclick = () => location.href = "index.html";
 
     document.getElementById("regBtn").onclick = () => {
-    console.log("Signup Clicked")
-    //no API yet
-    document.getElementById("status").textContent = "Signup Completed (no API yet)";
+        console.log("Signup Clicked")
+        //no API yet
+        document.getElementById("status").textContent = "Signup Completed (no API yet)";
     };
 }
 
 function wireContacts(){
 //basic login success- again need to wait for API
-if(localStorage.getItem("loggedIn")!== "true"){
-    location.href = "index.html";
-    return;
-}
+    if(localStorage.getItem("loggedIn")!== "true"){
+        location.href = "index.html";
+        return;
+    }
 
-document.getElementById("logoutBtn").onclick = () => {
-    localStorage.removeItem("loggedIn");
-    location.href = "index.html";
-};
+    document.getElementById("logoutBtn").onclick = () => {
+        localStorage.removeItem("loggedIn");
+        location.href = "index.html";
+    };
 }
