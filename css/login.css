@@ -1,3 +1,10 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; 
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +16,7 @@ body{
     height: 100vh;
     background: url("../images/nomoon.png") no-repeat center bottom;
     background-size: cover;
+    
 }
 
 .overlay{
@@ -17,6 +25,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 /* login glass card */
