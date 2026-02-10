@@ -31,6 +31,11 @@ function wireLogin(){
         //Login was succesful - pretend login for right now
         localStorage.setItem("loggedIn", "true");
 
+        //pretend Backend 
+        localStorage.setItem("firstName", "juan");
+        localStorage.setItem("lastName", "Loves");
+
+
     };
 }
 
@@ -52,6 +57,8 @@ function wireContacts(){
         return;
     }
 
+    setWelcomeText();
+
     document.getElementById("logoutBtn").onclick = () => {
         localStorage.removeItem("loggedIn");
         location.href = "index.html";
@@ -69,3 +76,35 @@ function showPassword()
         hidePass.type = "password";
     }
 }
+
+//writes welcome text for user
+function setWelcomeText() 
+{
+    const welcome = document.getElementById("welcomeText");
+    if (!welcome) return;
+
+    const first = localStorage.getItem("firstName");
+    const last  = localStorage.getItem("lastName");
+
+    if (first && last) welcome.textContent = `Welcome, ${first} ${last}`;
+    else welcome.textContent = "Welcome";
+}
+
+//updates contacts list
+function createContacts(contacts) {
+  const body = document.getElementById("resultsBody");
+  body.innerHTML = "";
+
+  for (const c of contacts) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${c.FirstName}</td>
+      <td>${c.LastName}</td>
+      <td>${c.Phone}</td>
+      <td>${c.Email}</td>
+    `;
+    body.appendChild(tr);
+  }
+}
+
+
