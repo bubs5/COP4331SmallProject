@@ -5,6 +5,7 @@
 	$phone = $inData["Email"];
 	$firstName = $inData["FirstName"];
 	$lastName = $inData["LastName"];
+	$ID = $inData["id"]
 
 	$conn = new mysqli("localhost", "root", getPassword(), "COP4331"); 
 	if ($conn->connect_error) 
@@ -13,7 +14,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (ID,FirstName,LastName,Phone,Email) VALUES('$firstName', '$lastName', '$phone', '$email')");
+		$stmt = $conn->prepare("INSERT into Contacts (ID,FirstName,LastName,Phone,Email) VALUES('$ID', '$firstName', '$lastName', '$phone', '$email')");
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$stmt->execute();
 			$stmt->close();
@@ -42,3 +43,4 @@
 	}
 	
 ?>
+
