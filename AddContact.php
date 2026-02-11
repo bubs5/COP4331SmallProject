@@ -1,8 +1,8 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$email = $inData["Phone"];
-	$phone = $inData["Email"];
+	$email = $inData["Email"];
+	$phone = $inData["Phone"];
 	$firstName = $inData["FirstName"];
 	$lastName = $inData["LastName"];
 	$ID = $inData["id"]
@@ -43,4 +43,5 @@
 	}
 	
 ?>
+
 
