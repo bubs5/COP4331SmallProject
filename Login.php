@@ -14,15 +14,22 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE Login=? AND Password=?");
-		$hashed = md5($inData["password"]);
-		$stmt->bind_param("ss", $inData["login'], $hashed);
+		$stmt = $conn->prepare("SELECT ID,FirstName,LastName,Password FROM Users WHERE Login=?");
+		$stmt->bind_param("s", $inData["login"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+			if( password_verify($inData["password"], $row["Password"]) )
+			{
+        		returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+			}
+			else
+			{
+				returnWithError("No Records Found");
+			}
+    
 		}
 		else
 		{
@@ -57,5 +64,6 @@
 	}
 	
 ?>
+
 
 
