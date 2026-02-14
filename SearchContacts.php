@@ -12,9 +12,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
+		$stmt = $conn->prepare("select Name from Contacts where Name like ?");
 		$user = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $user, $inData["UserID"]);
+		$stmt->bind_param("ss", $user);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -66,3 +66,4 @@
 	}
 	
 ?>
+
