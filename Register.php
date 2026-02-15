@@ -14,7 +14,7 @@ if ($first === "" || $last === "" || $login === "" || $pass === "")
     exit();
 }
 
-$conn = new mysqli("localhost", "root", getPassword(), "COP4331");
+$conn = new mysqli("localhost", "root", getPassword(), "CONTACTSPROJ");
 
 if ($conn->connect_error)
 {
@@ -26,7 +26,7 @@ $stmt = $conn->prepare(
     "INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)"
 );
 
-$hashed = md5($pass);
+$hashed = password_hash($pass, PASSWORD_DEFAULT);
 $stmt->bind_param("ssss", $first, $last, $login, $hashed);
 
 if ($stmt->execute())
