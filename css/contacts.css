@@ -134,7 +134,7 @@ body
 
 .tbl 
 {
-  position: absolute;          
+  position: absolute;
   top: 25%;
   left: 50%;
   transform: translateX(-50%);
@@ -198,4 +198,39 @@ body
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#contactsTable {
+    display: none;
+}
+
+
+.addbutton{
+    position: absolute;
+    top:30px;
+    left:10px;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+
+    width: 180px;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color:white;
+    background: rgba(182, 41, 41, 0.55);
+
+}
+
+.addbutton:hover
+{
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+#addContacts{
+    display: block;
+    margin: 12px auto 0;
 }

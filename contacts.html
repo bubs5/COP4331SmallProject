@@ -11,13 +11,13 @@
 
         <h2 id="welcomeText" class="welcome">Welcome, </h2>
         <div class="logout">
-            <button id="logoutBtn"class="btn">LOGOUT</button>
+            <button id="logoutBtn" class="btn" onclick="location.href='index.html'">LOGOUT</button>
         </div>
         <!--  <button id="goAdd"class="btn"> Add Contact</button> -->
 
        <div class="searchBox">
-            <input id="searchText" placeholder="Search">
-            <button id="searchBtn">Search</button>
+            <input id="searchText" placeholder="Search Contacts">
+            <button id="searchBtn" onclick="searchContact()">Search</button>
             <p id="searchStatus"></p>
             <div id="results"></div>
        </div>
@@ -33,168 +33,20 @@
                         <th>ACTIONS</th>
                     </tr>
                 </thead>
-                <tbody id="resultsBody">
-    <!--  example contacts, put into JS -->
-    <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
- <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>johasdasdasadsn.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john.doe@email.com</td>
-    <td>555-123-4567</td>
-    <td class="actions">
-    <button class="actionBtn edit">Edit</button>
-    <button class="actionBtn delete">Delete</button>
-  </td>
-  </tr>
+                <tbody id="tbody">
 
-   
 
                 </tbody>
             </table>
        </div>
-        
+
+
+        <button id="addContacts" class="addbutton" onclick="location.href='add.html'">ADD CONTACT</button>
     </div>
     
-    <script src="js/app.js"></script>
+    <script src="js/app.js">readCookie();</script>
+
+
 </body>
 
 </html>
