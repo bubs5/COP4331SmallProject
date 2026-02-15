@@ -14,7 +14,7 @@ if ($first === "" || $last === "" || $login === "" || $pass === "")
     exit();
 }
 
-$conn = new mysqli("localhost", "root", getPassword(), "COP4331");
+$conn = new mysqli("localhost", "root", getPassword(), "CONTACTSPROJ");
 
 if ($conn->connect_error)
 {
