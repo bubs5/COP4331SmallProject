@@ -5,14 +5,14 @@
 	$searchResults = "";
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "root", getPassword(), "COP4331"); 
+	$conn = new mysqli("localhost", "root", getPassword(), "CONTACTSPROJ"); 
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Contacts where Name like ?");
+		$stmt = $conn->prepare("select * from Contacts where FirstName like ? or LastName like ?");
 		$user = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $user);
 		$stmt->execute();
@@ -66,4 +66,5 @@
 	}
 	
 ?>
+
 
