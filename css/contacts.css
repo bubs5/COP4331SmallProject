@@ -207,8 +207,8 @@ body
 
 .addbutton{
     position: absolute;
-    top:30px;
-    left:10px;
+    top:25px;
+    left:20px;
     display:flex;
     flex-direction: column;
     gap: 15px;
@@ -234,3 +234,5 @@ body
     display: block;
     margin: 12px auto 0;
 }
+
+.actions button { margin-right: 6px; }

@@ -3,21 +3,22 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/add.css">
-    <title>add</title>
-
+    <title>Edit Contact</title>
 </head>
 
 <body>
 <div class="overlay">
     <div class="contactbox">
-        <!-- back arrow button -->
+
         <button class="backBtn" onclick="location.href='contacts.html'" aria-label="Back to contacts">
             <img src="images/goback.png" alt="Back">
         </button>
 
-        <h1 class="formTitle">ADD CONTACT</h1>
-        <!--info needed for account -->
+        <h1 class="formTitle">EDIT CONTACT</h1>
+
         <form class="form" autocomplete="on">
+            <input type="hidden" id="editContactId">
+
             <label class="field">
                 <span class="labelText">First Name:</span>
                 <input class="infoField" id="infoFirst" placeholder="First Name" type="text" required>
@@ -38,26 +39,28 @@
                 <input class="infoField" id="infoEmail" placeholder="example@mail.com" type="text" required>
             </label>
 
-            <!-- <label class="checkbox">
-                <input type="checkbox" onclick="togglePass('regPassword')">
-                <span>Show Password</span>
-            </label> -->
+            <button type="button" id="saveEditBtn" class="btn primaryBtn" onclick="saveEditContact();">
+                Save Changes
+            </button>
 
-
-            <button type="button" id="addContactBtn" class="btn primaryBtn" onclick="addContact();">Add Contact</button>
-
-
-            <p id="addContactResult" class="status"></p>
+            <p id="editContactResult" class="status"></p>
         </form>
     </div>
 </div>
 
-<script src="js/md5.js"></script>
 <script src="js/app.js"></script>
-<script>
-    readCookie();
-</script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        document.getElementById("editContactId").value = params.get("id") || "";
+        document.getElementById("infoFirst").value = params.get("first") || "";
+        document.getElementById("infoLast").value  = params.get("last") || "";
+        document.getElementById("infoPhone").value = params.get("phone") || "";
+        document.getElementById("infoEmail").value = params.get("email") || "";
+    });
+</script>
 
 </body>
 </html>

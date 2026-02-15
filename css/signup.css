@@ -150,6 +150,7 @@ body{
     transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
 }
 
+
 .primaryBtn{
     background: rgba(255,255,255,0.92);
     color: #2b2b2b;
