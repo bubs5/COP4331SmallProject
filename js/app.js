@@ -508,7 +508,7 @@ function saveEditContact() {
         return;
     }
 
-    // Payload format (adjust keys later if your API expects different names)
+    //
     const payload = {
         contactId: contactId,
         userId: userId,
@@ -521,7 +521,7 @@ function saveEditContact() {
     const jsonPayload = JSON.stringify(payload);
 
     //API placement name
-    const url = urlBase + '/UpdateContact.' + extension;
+    const url = urlBase + '/EditContact.' + extension;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
