@@ -1,0 +1,105 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body
+{
+    height:100vh;
+    background: url("../images/nomoon.png") no-repeat center bottom;
+    background-size: cover;
+    overflow:hidden;
+}
+
+.membersTitle
+{
+    position:absolute;
+    top:40px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    letter-spacing:4px;
+}
+
+.topButtons
+{
+    position:absolute;
+    top:30px;
+    right:30px;
+}
+
+.btn
+{
+    width:180px;
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+    color:white;
+    background: rgba(182,41,41,.55);
+}
+
+.btn:hover
+{
+    transform:scale(1.05);
+}
+.homeBtn
+{
+    position:absolute;
+    top:30px;
+    left:30px;
+}
+
+.membersContainer
+{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    display:grid;
+    grid-template-columns: repeat(6, 90px);
+    column-gap: 40px;
+    row-gap: 60px;
+    justify-content:center;
+}
+
+.memberCard
+{
+    width: 180px;
+    text-align:center;
+    color:white;
+
+    grid-column: span 2;  
+}
+
+
+.memberCard:nth-child(4)
+{
+    grid-column: 2 / span 2;
+    grid-row: 2;
+}
+
+.memberCard:nth-child(5)
+{
+    grid-column: 4 / span 2;
+    grid-row: 2;
+}
+
+.memberCard img
+{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid rgba(182,41,41,.55);
+    margin-bottom:10px;
+}
+
+.memberCard p
+{
+    font-size:18px;
+}
