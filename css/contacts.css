@@ -236,3 +236,136 @@ body
 }
 
 .actions button { margin-right: 6px; }
+
+
+@media (max-width: 640px) 
+{
+  html, body 
+  {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .scene 
+  {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    padding-bottom: 86px; 
+    overflow: hidden;
+  }
+
+  .welcome,
+  .searchBox,
+  .tbl,
+  .addbutton,
+  .logout {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .welcome 
+  {
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-top: 6px !important;
+  }
+
+  .searchBox 
+  {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .searchBox input,
+  #searchBtn 
+  {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+    border-radius: 999px;
+  }
+
+  .tbl 
+  {
+    width: 100%;
+    max-width: 420px;
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+    background: rgb(140, 30, 30);
+  }
+
+  #contacts 
+  {
+    width: 100%;
+    min-width: 0;       
+    table-layout: fixed;  
+  }
+
+  #contacts th,
+  #contacts td 
+  {
+    font-size: 13px;      
+    padding: 10px 1px;
+  }
+
+  #contacts td 
+  {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .logout 
+  {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    display: flex !important;
+    gap: 10px !important;
+    z-index: 1000 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  #addContacts
+   {
+    position: fixed !important;
+    left: calc(50% + 5px) !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    z-index: 1001 !important;
+    width: auto !important;
+  }
+
+  #logoutBtn 
+  {
+    width: calc(50% - 17px) !important;
+  }
+
+  #logoutBtn,
+  #addContacts 
+  {
+    min-height: 48px;
+    font-size: 16px;
+    border-radius: 999px;
+  }
+}
