@@ -14,7 +14,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("Update Contact set FirstName = '$firstName', LastName = '$lastName', Email = '$email', Phone = '$phone' where ID = '$ID'");
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = '$firstName', LastName = '$lastName', Email = '$email', Phone = '$phone' where ID = '$ID'");
 			$stmt->execute();
 			$stmt->close();
 			$conn->close();
@@ -40,3 +40,4 @@
 	}
 	
 ?>
+
