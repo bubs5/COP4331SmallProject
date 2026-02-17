@@ -1,6 +1,6 @@
 // var urlBase = ''website whenever we have
 //const urlBase = "http://165.245.142.62";
-const urlBase = "http://localhost/COP4331SmallProject";
+const urlBase = "";
 const extension = 'php';
 
 let userId = 0;

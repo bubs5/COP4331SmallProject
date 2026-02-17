@@ -1,68 +1,92 @@
 <?php
-header("Content-Type: application/json");
+	error_reporting(E_ALL);
+	ini_set('display_errors', 0);
 
-$inData = json_decode(file_get_contents("php://input"), true);
+	header("Access-Control-Allow-Origin: *");
+	header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+	header("Access-Control-Allow-Headers: Content-Type");
+	header("Content-Type: application/json");
 
-$first = $inData["firstName"] ?? "";
-$last  = $inData["lastName"] ?? "";
-$login = $inData["login"] ?? "";
-$pass  = $inData["password"] ?? "";
+	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+		http_response_code(200);
+		exit();
+	}
 
-if ($first === "" || $last === "" || $login === "" || $pass === "")
-{
-    returnWithError("Missing required fields");
-    exit();
-}
+	require_once '/var/www/config.php';
 
-$conn = new mysqli("localhost", "root", getPassword(), "CONTACTSPROJ");
+	try {
+		$rawInput = file_get_contents("php://input");
 
-if ($conn->connect_error)
-{
-    returnWithError($conn->connect_error);
-    exit();
-}
+		if ($rawInput === false || $rawInput === "") {
+			returnWithError("No input received");
+			exit();
+		}
 
-$stmt = $conn->prepare(
-    "INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)"
-);
+		$inData = json_decode($rawInput, true);
 
-$hashed = password_hash($pass, PASSWORD_DEFAULT);
-$stmt->bind_param("ssss", $first, $last, $login, $hashed);
+		if ($inData === null) {
+			returnWithError("Invalid JSON: " . json_last_error_msg());
+			exit();
+		}
 
-if ($stmt->execute())
-{
-    returnWithInfo($first, $last, $conn->insert_id);
-}
-else
-{
-    returnWithError("Login already exists");
-}
+		$first = $inData["firstName"] ?? "";
+		$last  = $inData["lastName"] ?? "";
+		$login = $inData["login"] ?? "";
+		$pass  = $inData["password"] ?? "";
 
-$stmt->close();
-$conn->close();
+		if ($first === "" || $last === "" || $login === "" || $pass === "") {
+			returnWithError("Missing required fields");
+			exit();
+		}
 
-function getPassword()
-{
-    return trim(file_get_contents("/root/.digitalocean_password"));
-}
+		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-function returnWithError($err)
-{
-    echo json_encode([
-        "id" => 0,
-        "firstName" => "",
-        "lastName" => "",
-        "error" => $err
-    ]);
-}
+		if ($conn->connect_error) {
+			returnWithError("DB connection failed: " . $conn->connect_error);
+			exit();
+		}
 
-function returnWithInfo($firstName, $lastName, $id)
-{
-    echo json_encode([
-        "id" => $id,
-        "firstName" => $firstName,
-        "lastName" => $lastName,
-        "error" => ""
-    ]);
-}
+		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)");
+
+		if (!$stmt) {
+			returnWithError("Prepare failed: " . $conn->error);
+			$conn->close();
+			exit();
+		}
+
+		$hashed = password_hash($pass, PASSWORD_DEFAULT);
+		$stmt->bind_param("ssss", $first, $last, $login, $hashed);
+
+		if ($stmt->execute()) {
+			returnWithInfo($first, $last, $conn->insert_id);
+		} else {
+			returnWithError("Execute failed: " . $stmt->error);
+		}
+
+		$stmt->close();
+		$conn->close();
+
+	} catch (Exception $e) {
+		returnWithError("Exception: " . $e->getMessage());
+	}
+
+	function returnWithError($err)
+	{
+		echo json_encode([
+			"id" => 0,
+			"firstName" => "",
+			"lastName" => "",
+			"error" => $err
+		]);
+	}
+
+	function returnWithInfo($firstName, $lastName, $id)
+	{
+		echo json_encode([
+			"id" => $id,
+			"firstName" => $firstName,
+			"lastName" => $lastName,
+			"error" => ""
+		]);
+	}
 ?>

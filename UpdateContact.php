@@ -17,29 +17,31 @@
 	try {
 		$inData = json_decode(file_get_contents('php://input'), true);
 
+		// Field names match what app.js saveEditContact() sends
+		$contactId = $inData["contactId"] ?? 0;
+		$userId    = $inData["userId"] ?? 0;
+		$firstName = $inData["firstName"] ?? "";
+		$lastName  = $inData["lastName"] ?? "";
+		$phone     = $inData["phone"] ?? "";
+		$email     = $inData["email"] ?? "";
+
 		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 		if ($conn->connect_error) {
 			returnWithError("DB connection failed: " . $conn->connect_error);
 			exit();
 		}
 
-		$stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID = ?");
-		$search = "%" . $inData["search"] . "%";
-		$userId = $inData["userId"];
-		$stmt->bind_param("ssi", $search, $search, $userId);
-		$stmt->execute();
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName=?, LastName=?, Email=?, Phone=? WHERE ID=? AND UserID=?");
+		$stmt->bind_param("ssssii", $firstName, $lastName, $email, $phone, $contactId, $userId);
 
-		$result = $stmt->get_result();
-		$searchResults = [];
-
-		while ($row = $result->fetch_assoc()) {
-			$searchResults[] = $row;
-		}
-
-		if (count($searchResults) == 0) {
-			returnWithError("No Records Found");
+		if ($stmt->execute()) {
+			if ($stmt->affected_rows >= 0) {
+				returnWithError("");
+			} else {
+				returnWithError("Contact not found or not authorized");
+			}
 		} else {
-			returnWithInfo($searchResults);
+			returnWithError("Update failed: " . $stmt->error);
 		}
 
 		$stmt->close();
@@ -51,11 +53,6 @@
 
 	function returnWithError($err)
 	{
-		echo json_encode(["results" => [], "error" => $err]);
-	}
-
-	function returnWithInfo($searchResults)
-	{
-		echo json_encode(["results" => $searchResults, "error" => ""]);
+		echo json_encode(["error" => $err]);
 	}
 ?>
