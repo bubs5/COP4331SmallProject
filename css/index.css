@@ -2,7 +2,8 @@ html, body {
   height: 100%;
   margin: 0;
   background: black; 
-    overscroll-behavior: none;
+  overflow: hidden;
+  overscroll-behavior: none;
 
 }
 
