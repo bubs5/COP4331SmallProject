@@ -1,19 +1,57 @@
 <!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Contacts</title></head>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="css/contacts.css"/>
+</head>
 
 <body>
-    <h1>Contacts</h1>
-    <button id="goAdd">Add Contact</button>
-    <button id="logoutBtn">Logout</button>
+    <div class="scene">
 
-    <h2>Search</h2>
-    <input id="searchText" placeholder="search">
-    <button id="searchBtn">Search</button>
-    <p id="searchStatus"></p>
-    <div id="results"></div>
+        <h2 id="welcomeText" class="welcome">Welcome, </h2>
+        <div class="logout">
+            <button id="logoutBtn" class="btn" onclick="doLogout()">LOGOUT</button>
+        </div>
+        <!--  <button id="goAdd"class="btn"> Add Contact</button> -->
+
+       <div class="searchBox">
+            <input id="searchText" placeholder="Search Contacts">
+            <button id="searchBtn" onclick="searchContact()">Search</button>
+            <p id="searchStatus"></p>
+            <div id="results"></div>
+       </div>
+       
+       <div class="tbl" id="contactsTable">
+            <table id="contacts">
+                <thead>
+                    <tr>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>PHONE</th>
+                        <th>EMAIL</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+
+            </table>
+       </div>
+
+
+        <button id="addContacts" class="addbutton" onclick="location.href='add.html'">ADD CONTACT</button>
+    </div>
 
     <script src="js/app.js"></script>
+    <script>
+        readCookie();
+    </script>
+
+
 </body>
 
 </html>
+
+

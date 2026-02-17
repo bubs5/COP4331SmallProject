@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/add.css">
+    <title>Edit Contact</title>
+</head>
+
+<body>
+<div class="overlay">
+    <div class="contactbox">
+
+        <button class="backBtn" onclick="location.href='contacts.html'" aria-label="Back to contacts">
+            <img src="images/goback.png" alt="Back">
+        </button>
+
+        <h1 class="formTitle">EDIT CONTACT</h1>
+
+        <form class="form" autocomplete="on">
+            <input type="hidden" id="editContactId">
+
+            <label class="field">
+                <span class="labelText">First Name:</span>
+                <input class="infoField" id="infoFirst" placeholder="First Name" type="text" required>
+            </label>
+
+            <label class="field">
+                <span class="labelText">Last Name</span>
+                <input class="infoField" id="infoLast" placeholder="Last Name" type="text" required>
+            </label>
+
+            <label class="field">
+                <span class="labelText">Phone Number</span>
+                <input class="infoField" id="infoPhone" placeholder="xxx-xxx-xxxx" type="text" required>
+            </label>
+
+            <label class="field">
+                <span class="labelText">E-mail Address</span>
+                <input class="infoField" id="infoEmail" placeholder="example@mail.com" type="text" required>
+            </label>
+
+            <button type="button" id="saveEditBtn" class="btn primaryBtn" onclick="saveEditContact();">
+                Save Changes
+            </button>
+
+            <p id="editContactResult" class="status"></p>
+        </form>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        document.getElementById("editContactId").value = params.get("id") || "";
+        document.getElementById("infoFirst").value = params.get("first") || "";
+        document.getElementById("infoLast").value  = params.get("last") || "";
+        document.getElementById("infoPhone").value = params.get("phone") || "";
+        document.getElementById("infoEmail").value = params.get("email") || "";
+    });
+</script>
+
+</body>
+</html>
