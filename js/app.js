@@ -2,7 +2,7 @@
 //const urlBase = "http://165.245.142.62";
 const urlBase = "";
 const extension = 'php';
-
+//const USE_MOCK_API = true;
 let userId = 0;
 let firstName, lastName = "";
 let ids = [];
@@ -11,7 +11,7 @@ let ids = [];
 
 //create new account function
 function signUp(){
-    let userId = 0;
+     userId = 0;
     let firstName = document.getElementById("regFirst").value;
     let lastName = document.getElementById("regLast").value;
     let username = document.getElementById("regLogin").value;
@@ -131,29 +131,41 @@ function setWelcomeText() {
 
 
 //searching contact list
-function searchContact()
-{
+function searchContact() {
+    console.log("Search triggered");
+
+    // make sure userId is loaded
+    readCookie();
+
     const qRaw = document.getElementById("searchText").value.trim();
-    const table = document.getElementById("contactsTable");
+    const tableWrap = document.getElementById("contactsTable");
     const tbody = document.getElementById("tbody");
 
-    // Hide table when search box is empty
     if (qRaw === "") {
-        table.style.display = "none";
+        tableWrap.style.display = "none";
         tbody.innerHTML = "";
-        ids = []; // clear any previous IDs
         return;
     }
 
-    table.style.display = "block";
+    tableWrap.style.display = "block";
 
-    const tmp = {
+    // MOCK MODE (if you want it)
+    /*if (USE_MOCK_API) {
+        const results = [
+            { ID: 101, firstName: "Alex", lastName: "Rivera", PhoneNumber: "407-555-0101", Email: "alex@ucf.edu" },
+            { ID: 102, firstName: "Maya", lastName: "Chen",   PhoneNumber: "407-555-0112", Email: "maya@ucf.edu" }
+        ];
+
+        renderSearchResults(results, qRaw);
+        return; // don't fall through to API
+    }*/
+
+    const payload = {
         search: qRaw,
         userId: userId
     };
 
-    const jsonPayload = JSON.stringify(tmp);
-    const url = urlBase + '/SearchContacts.' + extension;
+    const url = urlBase + "/SearchContacts." + extension;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -162,112 +174,88 @@ function searchContact()
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) return;
 
-        // HTTP error (404/500/etc)
         if (xhr.status !== 200) {
-            console.log("Search failed (HTTP " + xhr.status + "):", xhr.responseText);
-            tbody.innerHTML =
-                "<tr><td colspan='5'>Search failed (HTTP " + xhr.status + "). See console.</td></tr>";
-            ids = [];
+            console.log("Search failed:", xhr.status, xhr.responseText);
             return;
         }
 
-        // Parse JSON safely
         let jsonObject;
         try {
             jsonObject = JSON.parse(xhr.responseText);
         } catch (e) {
-            console.log("Non-JSON response from SearchContacts.php:");
-            console.log(xhr.responseText);
-            tbody.innerHTML =
-                "<tr><td colspan='5'>Search failed (server returned non-JSON). See console.</td></tr>";
-            ids = [];
+            console.log("Bad JSON from server:", xhr.responseText);
             return;
         }
 
-        // Backend-reported error
         if (jsonObject.error) {
-            console.log("Search error:", jsonObject.error);
-            tbody.innerHTML = "<tr><td colspan='5'>Search error. See console.</td></tr>";
-            ids = [];
+            console.log("API error:", jsonObject.error);
             return;
         }
 
-        const q = qRaw.toLowerCase();
-        let results = jsonObject.results || [];
-
-        if (q !== "") {
-            results = results.filter(r => {
-                const first = (r.firstName ?? r.FirstName ?? "").toLowerCase();
-                const last = (r.lastName ?? r.LastName ?? "").toLowerCase();
-                const email = (r.Email ?? r.email ?? "").toLowerCase();
-                const phone = (r.PhoneNumber ?? r.Phone ?? r.phone ?? "").toLowerCase();
-
-                return (`${first} ${last} ${email} ${phone}`).includes(q);
-            });
-        }
-        text = "";
-        for (let i = 0; i < results.length; i++) {
-            //ids[i] = jsonObject.results[i].ID
-            let r = results[i];
-
-            ids[i] = results[i].ID ?? results[i].Id ?? results[i].id ?? 0;
-
-            text += "<tr id='row" + i + "'>";
-
-            let first = r.firstName ?? r.FirstName ?? "";
-            let last = r.lastName ?? r.LastName ?? "";
-            let email = r.Email ?? r.email ?? "";
-            let phone = r.PhoneNumber ?? r.Phone ?? r.phone ?? "";
-
-            text += "<td id='first_Name" + i + "'><span>" + first + "</span></td>";
-            text += "<td id='last_Name" + i + "'><span>" + last + "</span></td>";
-
-            text += "<td id='phone" + i + "'><span>" + phone + "</span></td>";
-            text += "<td id='email" + i + "'><span>" + email + "</span></td>";
-
-            const contactId = results[i].ID ?? results[i].Id ?? results[i].id ?? 0;
-
-            text += "<td class='actions'>"
-                + "<button type='button' class='edit-btn'"
-                + " data-id='" + contactId + "'"
-                + " data-first='" + encodeURIComponent(first) + "'"
-                + " data-last='" + encodeURIComponent(last) + "'"
-                + " data-phone='" + encodeURIComponent(phone) + "'"
-                + " data-email='" + encodeURIComponent(email) + "'"
-                + ">Edit</button>"
-                + "<button type='button' class='delete-btn' data-id='" + contactId + "'>Delete</button>"
-                + "</td>";
-            text += "</tr>";
-
-        }
-
+        renderSearchResults(jsonObject.results || [], qRaw);
     };
 
-    try {
-        xhr.send(jsonPayload);
-    } catch (err) {
-        console.log(err.message);
-    }
-
-    //console.log("Final text being inserted:", text);
-  //  document.getElementById("tbody").innerHTML = text;
-
-   // const table = document.getElementById("contactsTable");
-    const searchValue = document.getElementById("searchText").value.trim();
-
-    if (searchValue !== "") {
-        table.style.display = "block";
-    } else {
-        table.style.display = "none";
-    }
-
+    xhr.send(JSON.stringify(payload));
 }
+
+function renderSearchResults(results, qRaw) {
+    const tbody = document.getElementById("tbody");
+    const q = qRaw.toLowerCase();
+
+    let filtered = results;
+
+    if (q !== "") {
+        filtered = results.filter(r => {
+            const first = (r.firstName ?? r.FirstName ?? "").toLowerCase();
+            const last  = (r.lastName  ?? r.LastName  ?? "").toLowerCase();
+            const email = (r.Email     ?? r.email     ?? "").toLowerCase();
+            const phone = (r.PhoneNumber ?? r.Phone ?? r.phone ?? "").toLowerCase();
+            return (`${first} ${last} ${email} ${phone}`).includes(q);
+        });
+    }
+
+    let text = "";
+
+    for (let i = 0; i < filtered.length; i++) {
+        const r = filtered[i];
+
+        const contactId = r.ID ?? r.Id ?? r.id ?? 0;
+        const first = r.firstName ?? r.FirstName ?? "";
+        const last  = r.lastName  ?? r.LastName  ?? "";
+        const email = r.Email     ?? r.email     ?? "";
+        const phone = r.PhoneNumber ?? r.Phone ?? r.phone ?? "";
+
+        text += `<tr id="row${i}">
+      <td id="first_Name${i}"><span>${first}</span></td>
+      <td id="last_Name${i}"><span>${last}</span></td>
+      <td id="phone${i}"><span>${phone}</span></td>
+      <td id="email${i}"><span>${email}</span></td>
+      <td class="actions">
+        <button type="button" class="edit-btn"
+          data-id="${contactId}"
+          data-first="${encodeURIComponent(first)}"
+          data-last="${encodeURIComponent(last)}"
+          data-phone="${encodeURIComponent(phone)}"
+          data-email="${encodeURIComponent(email)}"
+        >Edit</button>
+        <button type="button" class="delete-btn" data-id="${contactId}">Delete</button>
+      </td>
+    </tr>`;
+    }
+
+    console.log("Final text being inserted:", text);
+    tbody.innerHTML = text;
+}
+
+
 
 
 //add contact
 function addContact()
 {
-   console.log("addContact() gone");
+    readCookie();
+
+    console.log("addContact() gone");
     let firstName = document.getElementById("infoFirst").value.trim();
     let lastName = document.getElementById("infoLast").value.trim();
     let phoneNumber = document.getElementById("infoPhone").value.trim();
@@ -278,6 +266,7 @@ function addContact()
         lastName: lastName,
         phone: phoneNumber,
         email: emailAddress,
+        userId: userId,
         ID: userId
     }
     let jsonPayload = JSON.stringify(createContact);
@@ -308,7 +297,7 @@ function addContact()
 
                     // Redirect to contact page
                     setTimeout(function() {
-                       window.location.href = "contacts.html";
+                        window.location.href = "contacts.html";
                     }, 1000);
                 } else {
                     document.getElementById('addContactResult').textContent =
@@ -324,7 +313,6 @@ function addContact()
 
 
 }
-
 
 function deleteContact(){
 
