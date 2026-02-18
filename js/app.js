@@ -509,7 +509,7 @@ function saveEditContact() {
     const jsonPayload = JSON.stringify(payload);
 
     //API placement name
-    const url = urlBase + '/EditContact.' + extension;
+    const url = urlBase + '/UpdateContact.' + extension;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
