@@ -1,6 +1,6 @@
 // var urlBase = ''website whenever we have
-//const urlBase = "http://165.245.142.62";
-const urlBase = "";
+const urlBase = "http://165.245.142.62";
+//const urlBase = "";
 const extension = 'php';
 //const USE_MOCK_API = true;
 let userId = 0;
@@ -500,6 +500,8 @@ function doEdit(btn) {
 
 
 function saveEditContact() {
+    readCookie();
+
     const contactId = Number(document.getElementById("editContactId").value);
     const firstName = document.getElementById("infoFirst").value.trim();
     const lastName  = document.getElementById("infoLast").value.trim();
@@ -536,13 +538,18 @@ function saveEditContact() {
     xhr.onreadystatechange = function () {
         if (this.readyState !== 4) return;
 
-        if (this.status === 200) {
+        let resp = null;
+        try { resp = JSON.parse(this.responseText); } catch (_) {}
+
+        if (this.status === 200 && (!resp || !resp.error)) {
             if (status) status.textContent = "Contact updated successfully!";
             setTimeout(() => window.location.href = "contacts.html", 700);
         } else {
-            if (status) status.textContent = "Update failed: " + xhr.responseText;
+            const msg = resp?.error || this.responseText || `HTTP ${this.status}`;
+            if (status) status.textContent = "Update failed: " + msg;
         }
     };
+
 
     try {
         xhr.send(jsonPayload);
