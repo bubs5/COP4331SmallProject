@@ -251,7 +251,6 @@ body
     margin: 12px auto 0;
 }
 
-.actions button { margin-right: 6px; }
 
 
 @media (max-width: 640px) 
@@ -385,3 +384,36 @@ body
     border-radius: 999px;
   }
 }
+.actions button {
+    margin-right: 6px;
+    border: none;
+    border-radius: 999px;     /* makes it a bubble */
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* EDIT button */
+.edit-btn {
+    background: rgba(160, 45, 45, 0.75);
+}
+
+.edit-btn:hover {
+    background: rgba(190, 60, 60, 0.9);
+    transform: scale(1.08);
+}
+
+/*DELETE button */
+.delete-btn {
+    background: rgba(160, 45, 45, 0.75);
+}
+
+.delete-btn:hover {
+    background: rgba(190, 60, 60, 0.9);
+    transform: scale(1.08);
+}
+
