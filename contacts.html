@@ -17,12 +17,24 @@
         </div>
         <!--  <button id="goAdd"class="btn"> Add Contact</button> -->
 
-       <div class="searchBox">
-            <input id="searchText" placeholder="Search Contacts">
-            <button id="searchBtn" onclick="searchContact()">Search</button>
+        <div class="searchBox">
+
+            <!-- Search row -->
+            <div class="searchRow">
+                <input id="searchText" placeholder="Search Contacts">
+                <button id="searchBtn" onclick="searchContact()">Search</button>
+            </div>
+
+            <!-- Show all checkbox -->
+            <div class="showAllContainer">
+                <input type="checkbox" id="showAllChk" onchange="handleShowAllToggle()">
+                <label for="showAllChk">Show All</label>
+            </div>
+
             <p id="searchStatus"></p>
             <div id="results"></div>
-       </div>
+
+        </div>
        
        <div class="tbl" id="contactsTable">
             <table id="contacts">

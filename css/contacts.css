@@ -64,6 +64,13 @@ body
     text-align: center;
 }
 
+.searchRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+
 .searchBox 
 {
   position: absolute;
@@ -71,13 +78,14 @@ body
   left: 50%;
   transform: translateX(-50%);
   width: min(650px, 92vw);
-
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
-.searchBox input 
+
+.searchBox input
 {
   flex: 1;
   padding: 14px 20px;
@@ -132,10 +140,18 @@ body
   opacity: 0.92;
 }
 
+.showAllContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+}
+
 .tbl 
 {
   position: absolute;
-  top: 25%;
+  top: 28%;
   left: 50%;
   transform: translateX(-50%);
 

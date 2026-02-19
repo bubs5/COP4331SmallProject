@@ -128,26 +128,44 @@ function setWelcomeText() {
     }
 }
 
+function handleShowAllToggle() {
+    const checked = document.getElementById("showAllChk").checked;
+
+    if (checked) {
+        document.getElementById("searchText").value = "";
+        searchContact(true); // showAll flag
+    } else {
+        // optional: clear results when unchecked
+        const tableWrap = document.getElementById("contactsTable");
+        const tbody = document.getElementById("tbody");
+        tableWrap.style.display = "none";
+        tbody.innerHTML = "";
+    }
+}
 
 
 //searching contact list
-function searchContact() {
+function searchContact(showAll = false) {
     console.log("Search triggered");
-
-    // make sure userId is loaded
     readCookie();
 
-    const qRaw = document.getElementById("searchText").value.trim();
+    let qRaw = document.getElementById("searchText").value.trim();
     const tableWrap = document.getElementById("contactsTable");
     const tbody = document.getElementById("tbody");
 
-    if (qRaw === "") {
+    //only hide if empty
+    if (qRaw === "" && !showAll) {
         tableWrap.style.display = "none";
         tbody.innerHTML = "";
         return;
     }
 
+    //if showAll, force empty search to backend
+    if (showAll) qRaw = "";
+
     tableWrap.style.display = "block";
+
+
 
     // MOCK MODE (if you want it)
     /*if (USE_MOCK_API) {
@@ -533,6 +551,15 @@ function saveEditContact() {
     }
 }
 
+
+window.addEventListener("DOMContentLoaded", () => {
+    const last = sessionStorage.getItem("lastSearch");
+    if (last) {
+        const box = document.getElementById("searchText");
+        if (box) box.value = last;
+        searchContact(); //fetches new results for table
+    }
+});
 
 
 /*test search code
