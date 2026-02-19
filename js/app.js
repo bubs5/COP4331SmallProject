@@ -294,6 +294,15 @@ function addContact()
         window.alert("Please fill all required fields.");
         return;
     }
+    //email format validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(emailAddress)) {
+        document.getElementById("addContactResult").textContent =
+            "Please enter a valid email address.";
+        return;
+    }
+
     console.log(createContact);
 
     let url = urlBase + '/AddContact.' + extension;
