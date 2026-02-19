@@ -1,6 +1,6 @@
 // var urlBase = ''website whenever we have
-const urlBase = "http://165.245.142.62";
-//const urlBase = "";
+//const urlBase = "http://165.245.142.62";
+const urlBase = "";
 const extension = 'php';
 //const USE_MOCK_API = true;
 let userId = 0;
@@ -11,7 +11,7 @@ let ids = [];
 
 //create new account function
 function signUp(){
-     userId = 0;
+    userId = 0;
     let firstName = document.getElementById("regFirst").value;
     let lastName = document.getElementById("regLast").value;
     let username = document.getElementById("regLogin").value;
@@ -311,7 +311,7 @@ function addContact()
                     document.getElementById('infoEmail').value = '';
 
                     document.getElementById("addContactResult").textContent =
-                      "Contact added successfully!";
+                        "Contact added successfully!";
 
                     // Redirect to contact page
                     setTimeout(function() {
@@ -337,19 +337,19 @@ function deleteContact(){
 }
 //updates contacts list
 function createContacts(contacts) {
-  const body = document.getElementById("resultsBody");
-  body.innerHTML = "";
+    const body = document.getElementById("resultsBody");
+    body.innerHTML = "";
 
-  for (const c of contacts) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
+    for (const c of contacts) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
       <td>${c.FirstName}</td>
       <td>${c.LastName}</td>
       <td>${c.Phone}</td>
       <td>${c.Email}</td>
     `;
-    body.appendChild(tr);
-  }
+        body.appendChild(tr);
+    }
 }
 
 
@@ -464,7 +464,7 @@ function doDelete(contactID) {
             {
 
 
-               window.alert("Your contact was succesfully deleted!");
+                window.alert("Your contact was succesfully deleted!");
                 window.location.reload(true);
 
             }
