@@ -9,67 +9,66 @@
 </head>
 
 <body>
-    <div class="scene">
+<div class="scene">
 
-        <h2 id="welcomeText" class="welcome">Welcome, </h2>
-        <div class="logout">
-            <button id="logoutBtn" class="btn" onclick="doLogout()">LOGOUT</button>
+    <h2 id="welcomeText" class="welcome">Welcome, </h2>
+    <div class="logout">
+        <button id="logoutBtn" class="btn" onclick="doLogout()">LOGOUT</button>
+    </div>
+    <!--  <button id="goAdd"class="btn"> Add Contact</button> -->
+
+    <div class="searchBox">
+
+        <!-- Search row -->
+        <div class="searchRow">
+            <input id="searchText" placeholder="Search Contacts">
+            <button id="searchBtn" onclick="searchContact()">Search</button>
         </div>
-        <!--  <button id="goAdd"class="btn"> Add Contact</button> -->
 
-        <div class="searchBox">
-
-            <!-- Search row -->
-            <div class="searchRow">
-                <input id="searchText" placeholder="Search Contacts">
-                <button id="searchBtn" onclick="searchContact()">Search</button>
-            </div>
-
-            <!-- Show all checkbox -->
-            <div class="showAllContainer">
-                <input type="checkbox" id="showAllChk" onchange="handleShowAllToggle()">
-                <label for="showAllChk">Show All</label>
-            </div>
-
-            <p id="searchStatus"></p>
-            <div id="results"></div>
-
+        <!-- Show all checkbox -->
+        <div class="showAllContainer">
+            <input type="checkbox" id="showAllChk" onchange="handleShowAllToggle()" checked>
+            <label for="showAllChk">Show All</label>
         </div>
-       
-       <div class="tbl" id="contactsTable">
-            <table id="contacts">
-                <thead>
-                    <tr>
-                        <th>FIRST NAME</th>
-                        <th>LAST NAME</th>
-                        <th>PHONE</th>
-                        <th>EMAIL</th>
-                        <th>ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
 
-                </tbody>
+        <p id="searchStatus"></p>
+        <div id="results"></div>
 
-            </table>
-       </div>
-
-
-        <button id="addContacts" class="addbutton" onclick="location.href='add.html'">ADD CONTACT</button>
     </div>
 
-    <script src="js/app.js"></script>
-    <script>
-        readCookie();
-        console.log(" USER:", { userId, firstName, lastName });
+    <div class="tbl" id="contactsTable">
+        <table id="contacts">
+            <thead>
+            <tr>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
 
-        setWelcomeText();
+            </tbody>
 
-    </script>
+        </table>
+    </div>
+
+
+    <button id="addContacts" class="addbutton" onclick="location.href='add.html'">ADD CONTACT</button>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+    readCookie();
+    console.log(" USER:", { userId, firstName, lastName });
+
+    setWelcomeText();
+    handleShowAllToggle()
+</script>
 
 
 </body>
 
 </html>
-
 
